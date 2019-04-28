@@ -7,7 +7,7 @@ Programitas y Sketchs desarrollados para la cursada de Tecno4 de la carrera Dise
 
 Cada carpeta __TP##__ debe contener
 
-> Carpeta de __Pruebas__
-> Carpeta de __Entrega con fecha, formato _(dd,mm,aa)_ .__
+* Carpeta de __Pruebas__
+* Carpeta de __Entrega con fecha, formato _(dd,mm,aa)_ .__
 
 
