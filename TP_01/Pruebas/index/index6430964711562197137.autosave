@@ -1,0 +1,17 @@
+ Settings settings;
+Fondo fondo;
+
+void setup() {
+    size(1000, 500);
+    
+    fondo = new Fondo();
+
+    settings = new Settings(700);
+    settings.setOrientation();
+
+}
+
+void draw() {
+    background(0);
+    fondo.display();
+}
