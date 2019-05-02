@@ -11,8 +11,6 @@ class Pinceles
 
   Pinceles ()
   {
-    //    pincel_1=loadImage ("../../pinceles_IMG/pincelBlanco_0.png");
-    //  pincel_2= loadImage ("../../pinceles_IMG/pincelBlanco_2.png");
     cargaPincelesPrueba();
     imageMode(CENTER);
   }
