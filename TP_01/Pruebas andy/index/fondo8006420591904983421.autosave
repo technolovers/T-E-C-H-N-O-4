@@ -1,0 +1,22 @@
+class Fondo {
+    private float noiseScale = 0.0;
+    private float noiseInc = 0.008;
+    private ArrayList<Float> noiseVals;
+
+    Fondo () {
+       noiseVals = new ArrayList<Float>(width);
+
+       for(float noiseVal : noiseVals) {
+            noiseVal = noise(noiseScale)*255;
+            noiseVals.add(noiseVal);
+            noiseScale += noiseInc;
+        }
+    }
+
+    void display () {
+        for (int x=0; x < noiseVals.size(); x++) {
+            stroke(noiseVal);
+            line(x, 0, x, height);
+        }
+    }
+}
