@@ -29,17 +29,21 @@ void setup() {
 
 void draw() {
     fondo.displayBgColor(0);
+
+    fondo.mostrarLienzo();
     
-    fondo.pintarConMouse(mouseX, mouseY);
+    if (fondo.calcularPorcentajePintado() <= 98) {
+        fondo.pincelarConMouse(mouseX, mouseY);
+    } else {
+        /*
+        * mapeo a partir de la posicion en el eje x,
+        * entre el ancho total y la cantidad de figuras a dibujar
+        */
+        barcosADibujar = round(map(mouseX, 0, width, 0, cantBarcos));
 
-    /*
-    * mapeo a partir de la posicion en el eje x,
-    * entre el ancho total y la cantidad de figuras a dibujar
-    */
-    barcosADibujar = round(map(mouseX, 0, width, 0, cantBarcos));
-
-    for (int i = 0; i < barcosADibujar; i++) {
-        int h = 400 - (i * 20);
-        // barcos.get(i).display(0, height - h , 200 + (i * 90), h);
+        for (int i = 0; i < barcosADibujar; i++) {
+            int h = 400 - (i * 20);
+            barcos.get(i).display(0, height - h , 200 + (i * 90), h);
+        }
     }
 }

@@ -4,31 +4,57 @@ class Pinceles
   PImage pincel_2;
   color colorPincel= RGB;
   float alphaTint=0;
+  float miDireccionPolar;
 
-  int tamPincel=40;
+  int tamPincel = 40;
   ArrayList <PImage> pinceles= new ArrayList<PImage>();
   int cantPinceles=6;
 
   int pincelNum=0;
 
-  float posX=0, posY=0;
+  float posX=0, posY=0, prevPosX, prevPosY, ang;
+
   Pinceles ()
   {
     cargaPincelesPrueba();
   }
 
-  PGraphics dibuja()
-  {
-    PGraphics pg;
-    pg = createGraphics(tamPincel, int(tamPincel*1.5));
+  public float calcularAngulo (float mi_X, float mi_Y) {
+    prevPosX = posX;
+    prevPosY = posY;
+    posX = mi_X;
+    posY = mi_Y;
 
-    pg.beginDraw();
-    pg.tint(getColorPincel(), getAlphaTint());
-    pg.image(pinceles.get(pincelNum), getPosicion()[0], getPosicion()[1], tamPincel, tamPincel*1.5);
-    pg.endDraw();
+    miDireccionPolar = degrees(atan2( posY-prevPosY, posX-prevPosX ));
+    ang = miDireccionPolar;
 
-    return pg;
+    return ang;
   }
+
+  // public PGraphics dibuja()
+  // {
+  //   int w = tamPincel;
+  //   int h = int(tamPincel*1.5);
+  //   PGraphics pg;
+  //   pg = createGraphics(w, h);
+
+  //   pg.beginDraw();
+  //   pg.tint(getColorPincel(), getAlphaTint());
+  //   pg.image(pinceles.get(pincelNum), getPosicion()[0], getPosicion()[1], w, h);
+  //   pg.endDraw();
+
+  //   return pg;
+  // }
+
+  public void pintar(PGraphics pg, float mx, float my)
+  {
+    int w = tamPincel;
+    int h = int(tamPincel*1.5);
+
+    pg.tint(getColorPincel(), getAlphaTint());
+    pg.image(pinceles.get(pincelNum), mx, my, w, h);
+  }
+
   void cargaPincelesPrueba()
   {
     for (int i =0; i<cantPinceles; i++)
@@ -96,12 +122,18 @@ class Pinceles
   {
     return alphaTint;
   }
+
   float [] getPosicion()
   {
     float []arreglo = new float[2];
     arreglo[0]= posX;
     arreglo[1]=posY;
     return   arreglo;
+  }
+
+   int getTam()
+  {
+    return this.tamPincel;
   }
 
 
@@ -137,7 +169,6 @@ class Pinceles
   }
 
   void mouseDragged()
-
   {
     dibuja();
   }
