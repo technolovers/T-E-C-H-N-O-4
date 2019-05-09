@@ -9,7 +9,7 @@ void setup() {
     size(1000, 500);
 
     settings = new Settings();
-    settings.setOrientation(600);
+    settings.setOrientation(800);
     fondo = new Fondo();
 
     barcos = new ArrayList<Barco>();
@@ -43,7 +43,7 @@ void draw() {
 
         for (int i = 0; i < barcosADibujar; i++) {
             int h = 400 - (i * 20);
-            barcos.get(i).display(0, height - h , 200 + (i * 90), h);
+            barcos.get(i).display(130);
         }
     }
 }

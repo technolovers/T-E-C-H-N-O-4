@@ -70,7 +70,7 @@ class Barco {
         mascaras.add(nuevaMascara);
     }
 
-    public void display (int alfa) {
+    public void display () {
         int mascaraWidth = mascara.width;
         int mascaraHeight = mascara.height;
 
@@ -86,7 +86,6 @@ class Barco {
         
         // Dibujo la imagen
         image(this.barcoFill, px, py);
-        tint(255, alfa);
     }
 
     private PImage drawFill () {

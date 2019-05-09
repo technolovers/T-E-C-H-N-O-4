@@ -13,11 +13,11 @@ class Fondo {
   int pintados, porcentajePintado;
 
   Fondo () {
-    paleta = new Paleta( "./data/img/paleta-01.jpg" );
+    paleta = new Paleta( "../img/paleta-01.jpg" );
     lienzo = createGraphics(width, height);
 
     pincel.setAlphaTint(80);
-    pincel.setTam(150);
+    pincel.setTam(300);
   }
 
   public float calcularPorcentajePintado () {

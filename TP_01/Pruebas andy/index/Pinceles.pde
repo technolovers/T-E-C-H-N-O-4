@@ -6,7 +6,7 @@ class Pinceles
   float alphaTint=0;
   float miDireccionPolar;
 
-  int tamPincel = 40;
+  int tamPincel = int((width + height) * .8);
   ArrayList <PImage> pinceles= new ArrayList<PImage>();
   int cantPinceles=6;
 
@@ -59,7 +59,7 @@ class Pinceles
   {
     for (int i =0; i<cantPinceles; i++)
     {
-      setPincel("./data/img/pinceles_IMG/pincelBlanco_"+i+".png");
+      setPincel("../img/pinceles_IMG/pincelBlanco_"+i+".png");
     }
   }
 
@@ -166,10 +166,5 @@ class Pinceles
       }
     }
     println("tamArreglo"+pinceles.size()+"___"+pincelNum);
-  }
-
-  void mouseDragged()
-  {
-    dibuja();
   }
 }//cierra clase Pinceles
