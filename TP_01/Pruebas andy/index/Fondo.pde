@@ -4,13 +4,11 @@ class Fondo {
   Dir_Y_Vel vel = new Dir_Y_Vel();
   PGraphics lienzo;
   Paleta paleta;
+  Utils utils = new Utils();
 
   // Variables para pinceladas aleatorias
   float px = 0, py = 0, velocidad = 0;
   Boolean sentido = true, sePinta = false;
-
-  // Variables para calcular porcentaje pintado
-  int pintados, porcentajePintado;
 
   Fondo () {
     paleta = new Paleta( "../img/paleta-01.jpg" );
@@ -20,25 +18,8 @@ class Fondo {
     pincel.setTam(300);
   }
 
-  public float calcularPorcentajePintado () {
-    // Resetear cantidad de pixeles pintados antes de volver a ejecutar el ciclo.
-    pintados = 0;
-
-    lienzo.beginDraw();
-    lienzo.loadPixels();
-    int totalPixeles = lienzo.pixels.length;
-    for (int i = 0; i < totalPixeles; ++i) {
-      if (lienzo.pixels[i] != 0) {
-        pintados += 1;
-      }
-
-      porcentajePintado = (pintados * 100) / totalPixeles;
-    }
-    lienzo.updatePixels();
-    lienzo.endDraw();
-
-    println("Porcentaje pintado: " + porcentajePintado);
-    return porcentajePintado;
+  public int calcularPorcentajePintado () {
+    return utils.calcularPorcentajePintado(this.lienzo);
   }
 
   public void displayBgColor(color col) {  
@@ -59,19 +40,13 @@ class Fondo {
   public void pincelarRandom (float mx, float my) {
     velocidad = vel.calcularVelocidad(mx, my);
 
-    if (velocidad > 8 && velocidad < 55) {
+    if (velocidad > 3 && velocidad < 55) {
       sePinta = true;
     } else {
       sePinta = false;
     }
 
-    if (sePinta) {
-      // if (px <= width - random(25, 80)) {
-      //   px += 8;
-      //   py += random(.5, 1.7);
-      // } else {
-      //   sePinta = false;
-      // }
+    if (true) {
       lienzo.beginDraw();
       lienzo.imageMode(CENTER);
       pincel.setColorPincelRGB(paleta.darUnColor(255));

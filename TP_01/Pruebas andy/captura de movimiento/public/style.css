@@ -1,0 +1,12 @@
+#main {
+    width: 100vw;
+    height: 100vh;
+    /* display: flex !important; */
+    justify-content: center;
+    align-items: center;
+}
+
+#output {
+    position: relative;
+    border: solid 1px #000;
+}

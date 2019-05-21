@@ -19,40 +19,21 @@ class Pinceles
     cargaPincelesPrueba();
   }
 
-  public float calcularAngulo (float mi_X, float mi_Y) {
-    prevPosX = posX;
-    prevPosY = posY;
-    posX = mi_X;
-    posY = mi_Y;
-
-    miDireccionPolar = degrees(atan2( posY-prevPosY, posX-prevPosX ));
-    ang = miDireccionPolar;
-
-    return ang;
-  }
-
-  // public PGraphics dibuja()
-  // {
-  //   int w = tamPincel;
-  //   int h = int(tamPincel*1.5);
-  //   PGraphics pg;
-  //   pg = createGraphics(w, h);
-
-  //   pg.beginDraw();
-  //   pg.tint(getColorPincel(), getAlphaTint());
-  //   pg.image(pinceles.get(pincelNum), getPosicion()[0], getPosicion()[1], w, h);
-  //   pg.endDraw();
-
-  //   return pg;
-  // }
-
   public void pintar(PGraphics pg, float mx, float my)
   {
+    prevPosX = posX;
+    prevPosY = posY;
+    posX = mx;
+    posY = my;
+
     int w = tamPincel;
     int h = int(tamPincel*1.5);
+    // float brushAngle = atan2(my - prevPosY, mx - prevPosX) + + radians(90);
 
     pg.tint(getColorPincel(), getAlphaTint());
-    pg.image(pinceles.get(pincelNum), mx, my, w, h);
+    pg.translate(posX, posY);
+    // pg.rotate(brushAngle);
+    pg.image(pinceles.get(pincelNum), 0, 0, w, h);
   }
 
   void cargaPincelesPrueba()

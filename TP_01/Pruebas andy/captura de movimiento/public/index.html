@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body style="margin: 0; padding: 0">
+    <div id="loading">
+        Loading the model...
+    </div>
+    <div id='main' style='display:none'>
+        <video id="video" playsinline style=" -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        display: none;
+        ">
+        </video>
+        <canvas id="output" />
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>

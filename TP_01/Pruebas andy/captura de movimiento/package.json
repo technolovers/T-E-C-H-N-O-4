@@ -1,0 +1,33 @@
+{
+  "name": "tensorflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --watch",
+    "ws": "webpack-dev-server --compress && webpack --watch",
+    "start": "nodemon --experimental-modules ./server/server.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.19.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "@tensorflow-models/posenet": "^1.0.2",
+    "@tensorflow/tfjs": "^1.1.0",
+    "dat.gui": "^0.7.6",
+    "express": "^4.16.4",
+    "node-osc": "^4.1.0",
+    "socket.io": "^1.7.4"
+  }
+}
