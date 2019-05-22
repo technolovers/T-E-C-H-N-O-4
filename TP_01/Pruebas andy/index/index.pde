@@ -10,6 +10,9 @@ float x = 0, y = 0;
 int cantBarcos;
 int barcosADibujar = 1;
 
+// setear modo, modo mouse o modo osc (borrar)
+String setMode = "mouse";
+
 void setup() {
     size(1000, 500);
 
@@ -36,12 +39,22 @@ void draw() {
     for (Barco barco : barcos) {
         barco.display();
     }
-    
-    if (fondo.calcularPorcentajePintado() <= 90) {
-        fondo.pincelarConMouse(x, y);
-    } else {
-        for (int i = 0; i < barcosADibujar; i++) {
-            barcos.get(i).pincelar(x, y);
+    if (setMode.equals("mouse")) {
+        if (fondo.calcularPorcentajePintado() <= 90) {
+            fondo.pincelarConMouse(mouseX, mouseY);
+        } else {
+            for (int i = 0; i < barcosADibujar; i++) {
+                barcos.get(i).pincelar(mouseX, mouseY);
+            }
+        }
+    }
+    if (setMode.equals("osc")) {
+        if (fondo.calcularPorcentajePintado() <= 90) {
+            fondo.pincelarConMouse(x, y);
+        } else {
+            for (int i = 0; i < barcosADibujar; i++) {
+                barcos.get(i).pincelar(x, y);
+            }
         }
     }
 }
