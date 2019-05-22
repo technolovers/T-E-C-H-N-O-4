@@ -46,6 +46,7 @@ class Fondo {
       sePinta = false;
     }
 
+    // if (sePinta) {
     if (true) {
       lienzo.beginDraw();
       lienzo.imageMode(CENTER);

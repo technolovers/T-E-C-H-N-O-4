@@ -8,7 +8,7 @@ ArrayList <Barco> barcos;
 float x = 0, y = 0;
 
 int cantBarcos;
-int barcosADibujar;
+int barcosADibujar = 1;
 
 void setup() {
     size(1000, 500);
@@ -22,14 +22,8 @@ void setup() {
     cantBarcos = 4;
 
     for (int i = 0; i < cantBarcos; i++) {
-        // La primer instancia carga sin parametros.
-        if (i == 0) {
-            Barco a = new Barco();
-            barcos.add( a );
-        } else {
-            Barco b = new Barco(barcos.get(0));
-            barcos.add( b );
-        }
+        Barco a = new Barco();
+        barcos.add( a );
     }
 }
 
@@ -38,19 +32,16 @@ void draw() {
     fondo.displayBgColor(0);
 
     fondo.mostrarLienzo();
+
+    for (Barco barco : barcos) {
+        barco.display();
+    }
     
-    if (fondo.calcularPorcentajePintado() <= 98) {
+    if (fondo.calcularPorcentajePintado() <= 90) {
         fondo.pincelarConMouse(x, y);
     } else {
-        /*
-        * mapeo a partir de la posicion en el eje x,
-        * entre el ancho total y la cantidad de figuras a dibujar
-        */
-        barcosADibujar = round(map(mouseX, 0, width, 0, cantBarcos));
-
         for (int i = 0; i < barcosADibujar; i++) {
-            int h = 400 - (i * 20);
-            barcos.get(i).display(130);
+            barcos.get(i).pincelar(x, y);
         }
     }
 }
@@ -62,7 +53,9 @@ void oscEvent(OscMessage theOscMessage) {
         x = theOscMessage.get(0).floatValue();
         y = theOscMessage.get(1).floatValue();
 
-        x = map(x, width * .20, width * .80, 0, width);
-        y = map(y, height * .10, height * .90, 0, height);
+        x = map(x, width * .30, width * .70, 0, width);
+        y = map(y, height * .40, height * .60, 0, height);
+
+        println("x: "+ x + ", y: " + y);
     }
 }
