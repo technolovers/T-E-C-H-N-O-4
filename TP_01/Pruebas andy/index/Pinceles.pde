@@ -31,9 +31,9 @@ class Pinceles
     // float brushAngle = atan2(my - prevPosY, mx - prevPosX) + + radians(90);
 
     pg.tint(getColorPincel(), getAlphaTint());
-    pg.translate(posX, posY);
+    pg.imageMode(CENTER);
     // pg.rotate(brushAngle);
-    pg.image(pinceles.get(pincelNum), 0, 0, w, h);
+    pg.image(pinceles.get(pincelNum), posX, posY, w, h);
   }
 
   void cargaPincelesPrueba()

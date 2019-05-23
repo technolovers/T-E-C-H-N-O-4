@@ -67,7 +67,6 @@ class Fondo {
 
     if (sePinta) {
       lienzo.beginDraw();
-      lienzo.imageMode(CENTER);
       pincel.setColorPincelRGB(paleta.darUnColor(255));
       pincel.pintar(lienzo, mx, my);
       lienzo.endDraw();

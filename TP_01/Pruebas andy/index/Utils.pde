@@ -8,6 +8,11 @@ public class Utils {
     }
 
     public int calcularPorcentajePintado (PGraphics pg) {
+        /* 
+        * Modificar funcion para que guarde el estado actual de colores de pixeles
+        * en una variable y a partir de ese estado principal del pgraphics comparar 
+        * que pixeles cambian de color
+        */
         // Resetear cantidad de pixeles pintados antes de volver a ejecutar el ciclo.
         pintados = 0;
 

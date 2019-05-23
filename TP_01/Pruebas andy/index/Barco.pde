@@ -1,8 +1,10 @@
 class Barco {
+    public Paleta paleta = new Paleta("../img/muestreo-1.jpg");
+    public Utils utils = new Utils();
+
     public PGraphics barcoFill;
     public PImage trazo;
     public PImage trazoBlanco;
-    public Paleta paleta;
 
     // Mascaras
     ArrayList <PImage> mascaras = new ArrayList<PImage>();
@@ -13,16 +15,9 @@ class Barco {
     float px, py;
 
     Barco () {
-        paleta = new Paleta("../img/muestreo-1.jpg");
-        trazo = loadImage( "../img/trazo-03.png" );
+        // cargarMascaras();
 
-        trazo.filter( INVERT );
-        trazoBlanco = createImage( trazo.width, trazo.height, RGB );
-        trazoBlanco.filter( INVERT );
-        trazoBlanco.mask( trazo );
-
-        cargarMascaras();
-
+        this.prepararTrazo();
         mascara = this.getRandomMask();
 
         int mascaraWidth = mascara.width;
@@ -36,37 +31,36 @@ class Barco {
     }
 
     public void display () {
-        // Dibujo la imagen
-        image(this.barcoFill, px, py);
+        image(barcoFill, px, py);
     }
 
     public void pincelar (float mx, float my) {
-        int w = this.barcoFill.width;
-        int h = this.barcoFill.height;
+        int w = barcoFill.width;
+        int h = barcoFill.height;
 
-        this.barcoFill.beginDraw();
-            this.barcoFill.mask(mascara);
-            this.barcoFill.image(trazoBlanco, mx, my, w * 0.2, h * 0.15);
-            this.barcoFill.tint(paleta.darUnColor(80));
-        this.barcoFill.endDraw();
-    }
+        barcoFill.beginDraw();
+            barcoFill.mask(mascara);
+            barcoFill.imageMode(CENTER);
+            barcoFill.image(trazoBlanco, mx, my, w * 0.2, h * 0.15);
+            barcoFill.tint(paleta.darUnColor(80));
+        barcoFill.endDraw();
 
-    private void cargarMascaras() {
-        for (int i = 0; i < cantMascaras; i++)
-        {
-            setMascara("./../../img/mascaras2/Mascara_" + (i + 1) + ".png");
-            println("Cargó: Mascara_" + (i + 1) + ".png");
-        }
-    }
-
-    private void setMascara(String rutaImagen) {
-        PImage nuevaMascara = loadImage(rutaImagen);
-        mascaras.add(nuevaMascara);
+        println("porcentajeBarcoPintado: "+utils.calcularPorcentajePintado(barcoFill));
     }
 
     private PImage getRandomMask () {
-        int mascaraRandom = (int)random(0, cantMascaras);
+        int numMascara = (int)random(0, cantMascaras);
+        PImage mascaraRandom = loadImage("./../../img/mascaras2/Mascara_" + numMascara + ".png");
+        println("Cargó: Mascara_" + numMascara + ".png");
+        return mascaraRandom;
+    }
 
-        return mascaras.get(mascaraRandom);
+    private void prepararTrazo () {
+        trazo = loadImage( "../img/trazo-01.png" );
+
+        trazo.filter( INVERT );
+        trazoBlanco = createImage( trazo.width, trazo.height, RGB );
+        trazoBlanco.filter( INVERT );
+        trazoBlanco.mask( trazo );
     }
 }

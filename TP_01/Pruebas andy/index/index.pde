@@ -10,7 +10,7 @@ float x = 0, y = 0;
 int cantBarcos;
 int barcosADibujar = 1;
 
-// setear modo, modo mouse o modo osc (borrar)
+// setear modo, modo "mouse" o modo "osc" (borrar en entrega final)
 String setMode = "mouse";
 
 void setup() {
