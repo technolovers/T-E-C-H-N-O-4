@@ -24,6 +24,10 @@ function toTuple({ y, x }) {
   return [y, x];
 }
 
+export function normalizeVal(value, minA, maxA, minB, maxB) {
+  return (1 - ((value - minA) / (maxA - minA))) * minB + ((value - minA) / (maxA - minA)) * maxB
+}
+
 export function drawLine (ctx, w, h) {
   // Reset the current path
   ctx.beginPath(); 

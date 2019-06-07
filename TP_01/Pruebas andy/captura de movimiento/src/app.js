@@ -15,7 +15,7 @@
  * =============================================================================
  */
 import * as posenet from '@tensorflow-models/posenet'
-import { drawLine, drawKeypoints, drawSkeleton } from './utils'
+import { drawKeypoints, drawSkeleton, normalizeVal } from './utils'
 import io from './io'
 import puntosClave from './puntosClave'
 
@@ -105,7 +105,10 @@ function detectPoseInRealTime(video, net) {
        * Envia cada frame posiciones x, y de la muñeca por osc mientras se detecte el punto.
       */
       if (puntosClave.cuerpo.nariz !== 0) {
-        io.sendMessage([puntosClave.cuerpo.nariz.x, puntosClave.cuerpo.nariz.y])
+        let x = normalizeVal(puntosClave.cuerpo.nariz.x, 0, videoWidth, 0, 1)
+        let y = normalizeVal(puntosClave.cuerpo.nariz.y, 0, videoHeight, 0, 1)
+        
+        io.sendMessage([x, y])
       }
 
       drawKeypoints(pose.keypoints, config.minPartConfidence, ctx)
