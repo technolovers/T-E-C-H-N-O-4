@@ -14,6 +14,11 @@ class Barco {
     // Posicion
     float px, py;
 
+    //porcentaje de pintado
+    int pintados, porcentajePintado = 0;
+    boolean cargoPixelesMascara = false;
+    IntList pixelesMascara = new IntList();
+
     Barco () {
         // cargarMascaras();
 
@@ -45,7 +50,51 @@ class Barco {
             barcoFill.tint(paleta.darUnColor(80));
         barcoFill.endDraw();
 
-        println("porcentajeBarcoPintado: "+utils.calcularPorcentajePintado(barcoFill));
+        this.calcularPorcentajePintado(barcoFill);
+    }
+
+    public int calcularPorcentajePintado (PGraphics pg) {
+        pintados = 0;
+
+        pg.beginDraw();
+        pg.loadPixels();
+        // Guardar posiciones de pixeles de la mascara
+        for (int x = 0; x < pg.width; ++x) {
+            for (int y = 0; y < pg.height; ++y) {
+                int pixelIndex = x + y * pg.width;
+                float a = alpha(pg.pixels[pixelIndex]);
+
+                if (a != 0 && cargoPixelesMascara == false) {
+                    pixelesMascara.append(pixelIndex);
+                }
+            }
+        }
+        // Carga los pixeles que pertenecen a la mascara solo la primera vez
+        cargoPixelesMascara = true;
+
+        int totalPixelesMascara = pixelesMascara.size();
+        // Chequea solo los pixeles dentro de la mascara
+        for (int j = 0; j < totalPixelesMascara; ++j) { 
+            int index = pixelesMascara.get(j);
+            float r = red(pg.pixels[index]);
+            float g = green(pg.pixels[index]);
+            float b = blue(pg.pixels[index]);
+
+            // pinta los pixeles de la mascara (debug)
+            // pg.pixels[index] = color(0, 255, 0);
+
+            if (r != 0 && g != 0 && b != 0) {
+                pintados += 1;
+            }
+
+            porcentajePintado = (pintados * 100) / totalPixelesMascara;
+        }
+
+        println("Porcentaje pintado mascara: " + porcentajePintado);
+        pg.updatePixels();
+        pg.endDraw();
+
+        return porcentajePintado;
     }
 
     private PImage getRandomMask () {

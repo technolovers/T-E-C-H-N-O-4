@@ -69,6 +69,6 @@ void oscEvent(OscMessage theOscMessage) {
         x = map(x, width * .30, width * .70, 0, width);
         y = map(y, height * .40, height * .60, 0, height);
 
-        println("x: "+ x + ", y: " + y);
+        // println("x: "+ x + ", y: " + y);
     }
 }
