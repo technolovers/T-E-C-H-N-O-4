@@ -1,5 +1,6 @@
 let cuerpo = {
-    nariz: ''
+    nariz: '',
+    muñeca: ''
 }
 
 module.exports = {

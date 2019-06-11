@@ -99,14 +99,14 @@ function detectPoseInRealTime(video, net) {
       * Los nombres del objeto retornado por la libreria estan invertidos,
       * Las extremidades derechas en realidad son las extremidades izquierdas
       */
-      puntosClave.cuerpo.nariz = getPoint(pose.keypoints, 'nose')
+      puntosClave.cuerpo.muñeca = getPoint(pose.keypoints, 'rightWrist')
 
       /**
        * Envia cada frame posiciones x, y de la muñeca por osc mientras se detecte el punto.
       */
-      if (puntosClave.cuerpo.nariz !== 0) {
-        let x = normalizeVal(puntosClave.cuerpo.nariz.x, 0, videoWidth, 0, 1)
-        let y = normalizeVal(puntosClave.cuerpo.nariz.y, 0, videoHeight, 0, 1)
+      if (puntosClave.cuerpo.muñeca !== 0) {
+        let x = normalizeVal(puntosClave.cuerpo.muñeca.x, 0, videoWidth, 0, 1)
+        let y = normalizeVal(puntosClave.cuerpo.muñeca.y, 0, videoHeight, 0, 1)
         
         io.sendMessage([x, y])
       }
@@ -121,7 +121,7 @@ function detectPoseInRealTime(video, net) {
   poseDetectionFrame();
 }
 
-function getPoint (keypoints, pointName) {
+function getPoint (keypoints, pointName) {  
   let point = keypoints.filter(point => {
     return point.part === pointName && point.score >= config.minPartConfidence
   })

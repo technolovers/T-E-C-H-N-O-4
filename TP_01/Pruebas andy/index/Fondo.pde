@@ -37,29 +37,10 @@ class Fondo {
     image(lienzo, 0, 0);
   }
 
-  public void pincelarRandom (float mx, float my) {
-    velocidad = vel.calcularVelocidad(mx, my);
-
-    if (velocidad > 3 && velocidad < 55) {
-      sePinta = true;
-    } else {
-      sePinta = false;
-    }
-
-    // if (sePinta) {
-    if (true) {
-      lienzo.beginDraw();
-      lienzo.imageMode(CENTER);
-      pincel.setColorPincelRGB(paleta.darUnColor(255));
-      pincel.pintar(lienzo, mx, my);
-      lienzo.endDraw();
-    }
-  }
-
   public void pincelarConMouse (float mx, float my) {
     velocidad = vel.calcularVelocidad(mx, my);
 
-    if (velocidad > 3 && velocidad < 55) {
+    if (velocidad > 2 && velocidad < 55) {
       sePinta = true;
     } else {
       sePinta = false;

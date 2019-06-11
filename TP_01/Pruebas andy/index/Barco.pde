@@ -8,7 +8,7 @@ class Barco {
 
     // Mascaras
     ArrayList <PImage> mascaras = new ArrayList<PImage>();
-    int cantMascaras = 5;
+    int cantMascaras = 16;
     PImage mascara;
 
     // Posicion
@@ -42,11 +42,13 @@ class Barco {
     public void pincelar (float mx, float my) {
         int w = barcoFill.width;
         int h = barcoFill.height;
+        float pincelW = w * 0.3;
+        float pincelH = h * 0.2;
 
         barcoFill.beginDraw();
             barcoFill.mask(mascara);
             barcoFill.imageMode(CENTER);
-            barcoFill.image(trazoBlanco, mx, my, w * 0.2, h * 0.15);
+            barcoFill.image(trazoBlanco, mx, my, pincelW, pincelH);
             barcoFill.tint(paleta.darUnColor(80));
         barcoFill.endDraw();
 
@@ -99,7 +101,7 @@ class Barco {
 
     private PImage getRandomMask () {
         int numMascara = (int)random(0, cantMascaras);
-        PImage mascaraRandom = loadImage("./../../img/mascaras2/Mascara_" + numMascara + ".png");
+        PImage mascaraRandom = loadImage("./../img/Mascaras/" + numMascara + ".png");
         println("Cargó: Mascara_" + numMascara + ".png");
         return mascaraRandom;
     }
