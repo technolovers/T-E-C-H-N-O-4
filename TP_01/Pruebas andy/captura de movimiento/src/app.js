@@ -86,16 +86,16 @@ function detectPoseInRealTime(video, net) {
 
   async function poseDetectionFrame() {
     let pose = await net.estimateSinglePose(video, config.imageScaleFactor, config.flipHorizontal, config.outputStride)
-    
+
     // limpia esqueleto y puntos de frame anterior
     ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-    // showVideo(ctx)
+    showVideo(ctx)
 
     // draw the resulting skeleton and keypoints if over certain confidence scores
     if (pose.score >= config.minPoseConfidence) {
 
-      /* 
+      /*
       * Los nombres del objeto retornado por la libreria estan invertidos,
       * Las extremidades derechas en realidad son las extremidades izquierdas
       */
