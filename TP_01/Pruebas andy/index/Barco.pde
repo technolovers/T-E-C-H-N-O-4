@@ -49,7 +49,7 @@ class Barco {
             barcoFill.mask(mascara);
             barcoFill.imageMode(CENTER);
             barcoFill.image(trazoBlanco, mx, my, pincelW, pincelH);
-            barcoFill.tint(paleta.darUnColor(80));
+            barcoFill.tint(paleta.darUnColor(130));
         barcoFill.endDraw();
 
         this.calcularPorcentajePintado(barcoFill);
@@ -100,14 +100,14 @@ class Barco {
     }
 
     private PImage getRandomMask () {
-        int numMascara = (int)random(0, cantMascaras);
+        int numMascara = (int)random(1, cantMascaras);
         PImage mascaraRandom = loadImage("./../img/Mascaras/" + numMascara + ".png");
         println("Cargó: Mascara_" + numMascara + ".png");
         return mascaraRandom;
     }
 
     private void prepararTrazo () {
-        trazo = loadImage( "../img/trazo-01.png" );
+        trazo = loadImage( "../img/trazo-02.png" );
 
         trazo.filter( INVERT );
         trazoBlanco = createImage( trazo.width, trazo.height, RGB );

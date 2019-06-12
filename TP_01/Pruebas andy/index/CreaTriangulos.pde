@@ -5,33 +5,29 @@ class CreaTriangulos
   int w, h;
   float px, py;
   color col;
-  CreaTriangulos(int tamAncho_, int tamAlto_,float _px, float _py, color colorcitos_)
+
+  CreaTriangulos(int tamAncho_, int tamAlto_, color colorcitos_)
   {
     w = tamAncho_;
     h = tamAlto_;
-    px = _px;
-    py = _py;
+    px = random(0, width - tamAncho_);
+    py = random(0, height - tamAlto_);
     col = colorcitos_;
 
-    instrucciones();
+    triangulo = createGraphics(w, h);
   }
 
-  void instrucciones()
-  {
-    float tx = w/10;
-    float ty = h/10;
-    triangulo = createGraphics(w, h);
+  void dibujar() {
+    // float angle = radians(random(0, 360));
 
     triangulo.beginDraw ();
     triangulo.fill(col);
     triangulo.noStroke();
-    //    triangulo.triangle(random(10, 20), random(0, 10), random(25, 90), random(0, 50), random(0, 10), random(200, 290));
-    triangulo.triangle(random(tx/2, tx), random(0, ty/2), random(tx+tx/2, tx*4), random(0, ty*2), random(0, tx/2), random(ty*15, ty*19));
-
+    triangulo.triangle(random(0, w/2), random(0, h/4), random(w/2 + w/4, w), random(30, h - 30), random(0, w/2), random(h - 50, h));
     triangulo.endDraw();
   }
 
-  void dibujar () {
+  void display () {
     image(triangulo, px, py);
   }
 

@@ -31,8 +31,8 @@ const config = {
   flipHorizontal: true // since images are being fed from a webcam
 }
 
-const videoWidth = 600
-const videoHeight = 500
+const videoWidth = 900
+const videoHeight = videoWidth * 9/16
 
 let trigger = false
 
@@ -90,7 +90,7 @@ function detectPoseInRealTime(video, net) {
     // limpia esqueleto y puntos de frame anterior
     ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-    showVideo(ctx)
+    // showVideo(ctx)
 
     // draw the resulting skeleton and keypoints if over certain confidence scores
     if (pose.score >= config.minPoseConfidence) {
