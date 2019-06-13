@@ -20,9 +20,6 @@ class Barco {
     IntList pixelesMascara = new IntList();
 
     Barco () {
-        // cargarMascaras();
-
-        this.prepararTrazo();
         mascara = this.getRandomMask();
 
         int mascaraWidth = mascara.width;
@@ -33,6 +30,8 @@ class Barco {
         py = random(0, height - mascaraHeight);
 
         barcoFill = createGraphics(mascaraWidth, mascaraHeight);
+
+        this.prepararTrazo();
     }
 
     public void display () {
@@ -40,15 +39,13 @@ class Barco {
     }
 
     public void pincelar (float mx, float my) {
-        int w = barcoFill.width;
-        int h = barcoFill.height;
-        float pincelW = w * 0.3;
-        float pincelH = h * 0.2;
+        float mapX = mx - px;
+        float mapY = my - py;
 
         barcoFill.beginDraw();
             barcoFill.mask(mascara);
             barcoFill.imageMode(CENTER);
-            barcoFill.image(trazoBlanco, mx, my, pincelW, pincelH);
+            barcoFill.image(trazoBlanco, mapX, mapY);
             barcoFill.tint(paleta.darUnColor(130));
         barcoFill.endDraw();
 
@@ -107,10 +104,16 @@ class Barco {
     }
 
     private void prepararTrazo () {
+        int w = barcoFill.width;
+        int h = barcoFill.height;
+        int pincelW = int(w * 0.3);
+        int pincelH = int(h * 0.2);
+
         trazo = loadImage( "../img/trazo-02.png" );
+        trazo.resize(pincelW, pincelH);
 
         trazo.filter( INVERT );
-        trazoBlanco = createImage( trazo.width, trazo.height, RGB );
+        trazoBlanco = createImage( pincelW, pincelH, RGB );
         trazoBlanco.filter( INVERT );
         trazoBlanco.mask( trazo );
     }
