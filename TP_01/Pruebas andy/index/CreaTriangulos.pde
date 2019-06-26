@@ -4,7 +4,7 @@ class CreaTriangulos
   PImage mask;
   PImage trianguloFill;
 
-  int cantMascaras = 6;
+  int cantMascaras = 24;
 
   int w, h;
   float px, py;
@@ -13,15 +13,13 @@ class CreaTriangulos
   CreaTriangulos(color colorcitos_)
   {
     mask = this.getRandomMask();
-    mask.resize((int)random(20, 50), (int)random(350, height));
+    mask.resize(0, (int)random(350, height));
 
     w = mask.width;
     h = mask.height;
 
-    // Rango de variacion de posicion con respecto a la mitad de la pantalla
-    int range = 100;
-    px = random(width/2 - range, width/2 + range);
-    py = random(height/2 - range, height/2 + range);
+    px = random(0, width - w);
+    py = random(0, height - h);
 
     col = colorcitos_;
 

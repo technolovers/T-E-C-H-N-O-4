@@ -11,7 +11,7 @@ int nroCapa = 0;
 
 // Rasguños
 ArrayList <CreaTriangulos> triangulos;
-int cantTriangulos = (int)random(10, 18);
+int cantTriangulos = (int)random(7, 13);
 int trianguloADibujar = 0;
 
 // Detectar si se esta moviendo
