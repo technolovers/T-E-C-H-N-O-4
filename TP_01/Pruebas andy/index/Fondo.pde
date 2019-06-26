@@ -53,4 +53,8 @@ class Fondo {
       lienzo.endDraw();
     }
   }
+
+  void reiniciar () {
+    lienzo.clear();
+  }
 }

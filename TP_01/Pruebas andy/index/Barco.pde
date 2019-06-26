@@ -2,12 +2,11 @@ class Barco {
     public Paleta paleta = new Paleta("../img/muestreo-1.jpg");
     public Utils utils = new Utils();
 
-    public PGraphics barcoFill;
+    PGraphics barcoFill;
     public PImage trazo;
     public PImage trazoBlanco;
 
     // Mascaras
-    ArrayList <PImage> mascaras = new ArrayList<PImage>();
     int cantMascaras = 16;
     PImage mascara;
 
@@ -104,10 +103,8 @@ class Barco {
     }
 
     private void prepararTrazo () {
-        int w = barcoFill.width;
-        int h = barcoFill.height;
-        int pincelW = int(w * 0.3);
-        int pincelH = int(h * 0.2);
+        int pincelW = int(width * 0.25);
+        int pincelH = int(height * 0.15);
 
         trazo = loadImage( "../img/trazo-02.png" );
         trazo.resize(pincelW, pincelH);
@@ -116,5 +113,11 @@ class Barco {
         trazoBlanco = createImage( pincelW, pincelH, RGB );
         trazoBlanco.filter( INVERT );
         trazoBlanco.mask( trazo );
+    }
+
+    public void reiniciar () {
+        barcoFill.beginDraw();
+        barcoFill.clear();
+        barcoFill.endDraw();
     }
 }

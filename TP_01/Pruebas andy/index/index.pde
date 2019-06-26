@@ -11,7 +11,7 @@ int nroCapa = 0;
 
 // Rasguños
 ArrayList <CreaTriangulos> triangulos;
-int cantTriangulos = (int)random(5, 8);
+int cantTriangulos = (int)random(10, 18);
 int trianguloADibujar = 0;
 
 // Detectar si se esta moviendo
@@ -39,8 +39,9 @@ void setup() {
     triangulos = new ArrayList<CreaTriangulos>();
 
     for (int i = 0; i < cantTriangulos; i++) {
-        CreaTriangulos t = new CreaTriangulos(40, 600, color(180, 100));
+        CreaTriangulos t = new CreaTriangulos(color(0, 0, 15));
         triangulos.add(t);
+        println("Triangulos cargados: "+ i);
     }
 
     barcos = new ArrayList<Barco>();
@@ -127,7 +128,7 @@ void interactuar (float mx, float my) {
         // Suma barcos hasta que se iguale a la variable que controla la cantidad de barcos en total
         barcos.get(barcoADibujar).pincelar(mx, my);
 
-        if (barcos.get(barcoADibujar).porcentajePintado >= 97) {
+        if (barcos.get(barcoADibujar).porcentajePintado >= 96) {
             trigger = true;
             if (trigger) {
                 barcoADibujar += 1;
@@ -137,7 +138,7 @@ void interactuar (float mx, float my) {
     } else if (trianguloADibujar < cantTriangulos) {
         float velocidad = vel.calcularVelocidad(mx, my);
 
-        if (velocidad > 30) {
+        if (velocidad > 100) {
             seMueve = true;
         } else {
             seMueve = false;
@@ -153,6 +154,25 @@ void interactuar (float mx, float my) {
     } else {
         // Cambia la variable que mueve las capas de 0 al 3
         nroCapa = (int)map(mx, 0, width, 0, 4);
-        println("nroCapa: "+nroCapa);
+    }
+}
+
+
+void keyPressed () {
+    if (key == 'r') {
+        println("Reinicio");
+        fondo.reiniciar();
+
+        for (Barco barco : barcos) {
+            barco.reiniciar();
+        }
+
+        for (CreaTriangulos triangulo : triangulos) {
+            triangulo.reiniciar();
+        }
+
+        trianguloADibujar = 0;
+
+        barcoADibujar = 0;
     }
 }

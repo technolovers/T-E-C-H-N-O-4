@@ -1,38 +1,59 @@
 class CreaTriangulos
 {
-  PGraphics triangulo;
+  PGraphics canvas;
+  PImage mask;
+  PImage trianguloFill;
+
+  int cantMascaras = 6;
 
   int w, h;
   float px, py;
   color col;
 
-  CreaTriangulos(int tamAncho_, int tamAlto_, color colorcitos_)
+  CreaTriangulos(color colorcitos_)
   {
-    w = tamAncho_;
-    h = tamAlto_;
-    px = random(0, width - tamAncho_);
-    py = random(0, height - tamAlto_);
+    mask = this.getRandomMask();
+    mask.resize((int)random(20, 50), (int)random(350, height));
+
+    w = mask.width;
+    h = mask.height;
+
+    // Rango de variacion de posicion con respecto a la mitad de la pantalla
+    int range = 100;
+    px = random(width/2 - range, width/2 + range);
+    py = random(height/2 - range, height/2 + range);
+
     col = colorcitos_;
 
-    triangulo = createGraphics(w, h);
+    trianguloFill = createImage( w, h, ARGB );
+    trianguloFill.filter( INVERT );
+    trianguloFill.mask(mask);
+
+    canvas = createGraphics(width, height);
   }
 
-  void dibujar() {
-    // float angle = radians(random(0, 360));
+  public void dibujar() {
 
-    triangulo.beginDraw ();
-    triangulo.fill(col);
-    triangulo.noStroke();
-    triangulo.triangle(random(0, w/2), random(0, h/4), random(w/2 + w/4, w), random(30, h - 30), random(0, w/2), random(h - 50, h));
-    triangulo.endDraw();
+    canvas.beginDraw ();
+    canvas.imageMode(CENTER);
+    canvas.tint(col);
+    canvas.image(trianguloFill, px, px);
+    canvas.endDraw();
   }
 
-  void display () {
-    image(triangulo, px, py);
+  public void display () {
+    image(canvas, 0, 0);
   }
 
-  PImage getTriangulo()
-  {
-    return triangulo;
+  public void reiniciar () {
+    canvas.beginDraw();
+    canvas.clear();
+    canvas.endDraw();
+  }
+
+  private PImage getRandomMask () {
+    int numMascara = (int)random(1, cantMascaras);
+    PImage mascaraRandom = loadImage("./../img/Triangulos/tn" + numMascara + ".png");
+    return mascaraRandom;
   }
 }
